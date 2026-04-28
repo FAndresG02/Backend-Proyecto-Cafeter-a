@@ -65,7 +65,7 @@ public class CafeUtils {
         //Obtiene el tiempo en milisegundos desde 1970 (Unix epoch).
         long time = date.getTime();
         //Devuelve un String como: Factura: 1710639123456
-        return "Factura: " + time;
+        return "Factura_" + time;
     }
 
     // Metodo estático que recibe un String en formato JSON y devuelve un JSONArray, puede lanzar una excepción si el formato es inválido

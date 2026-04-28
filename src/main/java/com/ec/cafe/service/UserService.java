@@ -135,11 +135,16 @@ public class UserService {
                             customerUsersDetailsService.getUserDetail().getRole()
                     ); // genera token JWT
 
-                    return ResponseEntity.ok(new AuthResponse(token)); // devuelve token en JSON automático
+                    return ResponseEntity.ok(
+                            Map.of(
+                                    "message", "Inicio de sesión exitoso.",
+                                    "token", token
+                            )
+                    );// devuelve token en JSON automático
                 }
                 else{
                     return ResponseEntity.badRequest()
-                            .body(Map.of("message","Wait for admin approval."));
+                            .body(Map.of("message","Espere la aprobación del administrador."));
                 }
             }
 

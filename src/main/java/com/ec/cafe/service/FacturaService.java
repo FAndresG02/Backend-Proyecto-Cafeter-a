@@ -46,6 +46,8 @@ public class FacturaService {
         // Log para indicar que inicia el proceso de generación del reporte
         log.info("Generando el reporte....");
 
+        System.out.println("REQUEST MAP: " + requestMap);
+
         try {
 
             // Variable para almacenar el nombre del archivo PDF
@@ -384,7 +386,7 @@ public class FacturaService {
         try {
 
             // Verifica si el usuario autenticado es administrador
-            if (jwtAuthenticationFilter.isAdmin()){
+            if (jwtAuthenticationFilter.isAdmin() || jwtAuthenticationFilter.isUser()){
 
                 // Arreglo de bytes donde se almacenará el contenido del PDF
                 byte[] byteArray = new byte[0];
@@ -468,13 +470,13 @@ public class FacturaService {
 
                     facturaRepository.deleteById(id);
 
-                    return new ResponseEntity<>("Factura Eliminada", HttpStatus.OK);
+                    return CafeUtils.getResponseEntity("Factura Eliminada", HttpStatus.OK);
 
                 }else  {
-                    return new ResponseEntity<>("Factura no encontrada", HttpStatus.NOT_FOUND);
+                    return CafeUtils.getResponseEntity("Factura no encontrada", HttpStatus.NOT_FOUND);
                 }
             }else  {
-                return new ResponseEntity<>("No tienes Autorización", HttpStatus.UNAUTHORIZED);
+                return CafeUtils.getResponseEntity("No tienes Autorización", HttpStatus.UNAUTHORIZED);
             }
 
 

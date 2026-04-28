@@ -55,7 +55,7 @@ public class ProductService {
 
             }else {
                 // Si el usuario no es administrador se deniega el acceso
-                CafeUtils.getResponseEntity(CafeConstants.UNAUTHORIZED_ACCESS, HttpStatus.UNAUTHORIZED);
+                return CafeUtils.getResponseEntity(CafeConstants.UNAUTHORIZED_ACCESS, HttpStatus.UNAUTHORIZED);
             }
 
         }catch (Exception e){
@@ -295,7 +295,7 @@ public class ProductService {
 
         try {
 
-            if (jwtAuthenticationFilter.isAdmin()){
+            if (jwtAuthenticationFilter.isAdmin() || jwtAuthenticationFilter.isUser()){
 
                 return new ResponseEntity<> (productRepository.getAllProductByCategory(id), HttpStatus.OK);
 
@@ -315,7 +315,7 @@ public class ProductService {
 
         try {
 
-            if (jwtAuthenticationFilter.isAdmin()){
+            if (jwtAuthenticationFilter.isAdmin() || jwtAuthenticationFilter.isUser()){
 
                 return new ResponseEntity<> (productRepository.getProductById(id), HttpStatus.OK);
 
